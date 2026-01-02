@@ -59,14 +59,13 @@ async def serial_reader():
             
             await asyncio.sleep(0.01)
 
-async def main():
+async def run_server(port=8765):
+    print(f"Running WebSocket server on port {port}...")
+    
     server = await websockets.serve(
         handler,
         '0.0.0.0',
-        8765,
+        port,
     )
     
     await serial_reader()
-
-if __name__ == '__main__':
-    asyncio.run(main())

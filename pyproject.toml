@@ -12,3 +12,10 @@ maintainers = [
     {name = "Anthony Gardner"}
 ]
 requires-python = ">= 3.13"
+dependencies = [
+    "pyserial",
+    "websockets",
+]
+
+[project.scripts]
+gcs-gateway = "gcs_gateway.cli:main"
