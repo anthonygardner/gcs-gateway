@@ -41,17 +41,22 @@ async def serial_reader():
         if line:
             parts = line.split(',')
             
-            if len(parts) == 7:
+            ts_gateway = time.perf_counter_ns()
+            
+            if len(parts) == 8:
                 try:
                     data = {
-                        'ax': float(parts[0]),
-                        'ay': float(parts[1]),
-                        'az': float(parts[2]),
-                        'temp': float(parts[3]),
-                        'gx': float(parts[4]),
-                        'gy': float(parts[5]),
-                        'gz': float(parts[6]),
+                        'ts_gw': ts_gateway,
+                        'ts_stm32': int(parts[0]),
+                        'ax': float(parts[1]),
+                        'ay': float(parts[2]),
+                        'az': float(parts[3]),
+                        'temp': float(parts[4]),
+                        'gx': float(parts[5]),
+                        'gy': float(parts[6]),
+                        'gz': float(parts[7]),
                     }
+                    
                     await broadcast(json.dumps(data))
                     
                 except ValueError:
